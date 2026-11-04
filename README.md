@@ -33,15 +33,15 @@ The current restaurant name, menu, descriptions, prices, and photos are demo con
 
 ## Deploy to Render
 
-The repository includes `render.yaml` for a single Node.js web service in Singapore, with a 1 GB persistent disk mounted at `/var/data`. The service uses that disk for menu changes, orders, uploaded images, and the admin password hash. Render's Starter service and persistent disk are paid resources; review Render's current pricing and confirm charges in your account before creating them. The app has not been deployed yet.
+The repository includes `render.yaml` for a free Node.js web service in Singapore. Set a private `ADMIN_PASSWORD` environment variable in Render (at least 12 characters); the app creates the password hash on startup, so a shell is not required. Never put the password in GitHub or send it in chat.
 
 1. Push the latest project files, including `render.yaml`, to GitHub.
-2. In Render, choose **New → Blueprint**, connect GitHub, and select this repository. Review the service, region, disk, and price, then create it.
-3. Wait for the service to become healthy. In its Render dashboard, open **Shell** and run `node setup-admin.js`. Enter a strong password of at least 12 characters. Do this in the deployed service, not on your local computer.
-4. Open the Render service URL and sign in at `/admin.html`. Replace the demo menu and photos, configure the restaurant WhatsApp number, and review the privacy notice before accepting real customer details.
-5. Test an order and confirm it appears in the online admin dashboard. Back up the persistent disk privately.
+2. In Render, choose **New → Blueprint**, connect GitHub, and select this repository. Confirm that the service plan is **Free** before creating it.
+3. In the service's **Environment** settings, add `ADMIN_PASSWORD` with a strong password of at least 12 characters. Save the setting and allow Render to deploy.
+4. Open the Render service URL and sign in at `/admin.html`. Configure the restaurant details and review the privacy notice.
+5. Test the customer site and admin dashboard with sample orders only.
 
-Keep the persistent disk mounted at `/var/data` and run only one application instance with this JSON-file storage. Do not remove the disk or change `DATA_DIR` after collecting orders unless you have safely migrated the data. Never commit `data/` or share customer records. A custom domain is optional; Render provides an HTTPS URL.
+**Free service limitation:** Render Free services have no persistent disk and spin down when idle. Local files—including orders, menu edits, and uploads—can disappear when the service spins down, restarts, or redeploys, so the app may return to its initial demo state. The admin password is recreated from the private environment variable when the service starts. Do not use this free setup for real customer orders. For reliable order storage, upgrade to a paid service with a persistent disk mounted at `/var/data`, set `DATA_DIR=/var/data`, and keep only one app instance. Never commit `data/` or share customer records. A custom domain is optional; Render provides an HTTPS URL.
 
 This JSON-file store is appropriate for a small, single-instance pilot. Before scaling or running high-volume orders, move data to a managed database and use managed object storage for uploads. Test the live hosting setup, backup restoration, business contact details, privacy notice, and order handoff before inviting customers.
 

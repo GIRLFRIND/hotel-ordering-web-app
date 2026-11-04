@@ -266,7 +266,18 @@ async function initialize() {
     await saveState(state);
   }
   if (!await loadAdminCredentials()) {
-    console.warn("Admin is not configured. Run `npm run setup-admin` before using the admin dashboard.");
+    const password = process.env.ADMIN_PASSWORD;
+    if (password !== undefined) {
+      if (password.length < 12 || password.length > 200) {
+        throw new Error("ADMIN_PASSWORD must be between 12 and 200 characters.");
+      }
+      const salt = randomBytes(16).toString("base64url");
+      const hash = scryptSync(password, salt, 64).toString("base64url");
+      await fs.writeFile(adminFile, JSON.stringify({ salt, hash }), { flag: "wx", mode: 0o600 });
+      console.log("Admin password initialized from the ADMIN_PASSWORD environment variable.");
+    } else {
+      console.warn("Admin is not configured. Run `npm run setup-admin` or set ADMIN_PASSWORD before using the admin dashboard.");
+    }
   }
 }
 
