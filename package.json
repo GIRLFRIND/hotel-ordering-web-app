@@ -1,0 +1,14 @@
+{
+  "name": "dastarkhwan-pakistani-kitchen",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "A mobile-first Pakistani restaurant app with an admin menu and order inbox",
+  "scripts": {
+    "start": "node server.js",
+    "setup-admin": "node setup-admin.js",
+    "test": "node --test"
+  }
+}

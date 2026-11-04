@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17241d">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="app-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css?v=immersive-3d-v4">
+  <link rel="stylesheet" href="admin.css?v=admin-v2">
+  <script src="admin.js" defer></script>
+  <title>Restaurant Admin — Dastarkhwan</title>
+</head>
+<body class="admin-page">
+  <header class="topbar admin-topbar">
+    <a class="brand" href="/" aria-label="Dastarkhwan storefront">
+      <span class="brand-logo" aria-hidden="true">د</span>
+      <span class="brand-name">Dastarkhwan<small>RESTAURANT ADMIN</small></span>
+    </a>
+    <div class="admin-top-actions">
+      <a class="admin-store-link" href="/" target="_blank" rel="noopener noreferrer">Open storefront ↗</a>
+      <button class="orders-button hidden" id="logout-button" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-login-card" id="login-panel">
+      <span class="section-kicker"><span class="section-kicker-dot"></span> PRIVATE RESTAURANT ACCESS</span>
+      <h1>Welcome back.</h1>
+      <p>Sign in to manage menu items and customer orders.</p>
+      <form id="login-form" class="admin-form">
+        <label class="admin-field">Admin password<input id="login-password" name="password" type="password" autocomplete="current-password" minlength="12" maxlength="200" required></label>
+        <p class="admin-error hidden" id="login-error" role="alert"></p>
+        <button class="admin-primary-button" type="submit">Sign in <span aria-hidden="true">↗</span></button>
+      </form>
+      <small class="admin-login-help">Create a password privately in the server terminal with <code>node .\setup-admin.js</code>.</small>
+    </section>
+
+    <div id="admin-panel" class="hidden">
+      <section class="admin-heading">
+        <div><span class="section-kicker"><span class="section-kicker-dot"></span> RESTAURANT CONTROL ROOM</span><h1>Your kitchen,<br><em>your rules.</em></h1><p>Update today’s menu and keep an eye on orders as they arrive.</p></div>
+        <div class="admin-live"><span></span> PRIVATE ADMIN</div>
+      </section>
+
+      <section class="admin-stats" aria-label="Order summary">
+        <article class="admin-stat"><span>NEW ORDERS</span><b id="new-order-count">0</b><small>Waiting for review</small></article>
+        <article class="admin-stat"><span>MENU ITEMS</span><b id="menu-item-count">0</b><small>Currently listed</small></article>
+        <article class="admin-stat"><span>REQUEST VALUE</span><b id="order-total">Rs 0</b><small>Order value, not payments received</small></article>
+      </section>
+
+      <section class="admin-panel-section" id="orders">
+        <div class="admin-section-heading"><div><span class="section-kicker">LIVE ORDER INBOX</span><h2>Customer orders</h2><p>New orders are checked here. WhatsApp opens only when the customer taps Send.</p></div><button class="admin-secondary-button" id="refresh-orders" type="button">↻ Refresh</button></div>
+        <div class="admin-order-list" id="admin-orders-list"><p class="admin-loading">Loading orders…</p></div>
+      </section>
+
+      <section class="admin-panel-section" id="menu-management">
+        <div class="admin-section-heading"><div><span class="section-kicker">EDIT YOUR CATALOG</span><h2>Menu and prices</h2><p>Changes are saved on this server and appear on the customer menu.</p></div><button class="admin-primary-button admin-new-item" id="new-item-button" type="button">＋ Add a dish</button></div>
+        <div class="admin-menu-list" id="admin-menu-list"></div>
+      </section>
+
+      <section class="admin-panel-section admin-settings-section" id="restaurant-settings">
+        <div class="admin-section-heading"><div><span class="section-kicker">ORDER HANDOFF</span><h2>Restaurant details</h2><p>Add the WhatsApp number customers should message in international format.</p></div></div>
+        <form id="settings-form" class="admin-settings-form">
+          <label class="admin-field">Restaurant name<input id="restaurant-name" name="restaurantName" maxlength="80" required></label>
+          <label class="admin-field">WhatsApp number<input id="whatsapp-number" name="whatsappNumber" type="tel" placeholder="+923001234567" maxlength="22" autocomplete="tel"></label>
+          <p class="admin-form-note">Customers will still need to tap <b>Send</b> in WhatsApp. No payment is collected by this app.</p>
+          <p class="admin-error hidden" id="settings-error" role="alert"></p>
+          <button class="admin-primary-button" type="submit">Save restaurant details <span aria-hidden="true">↗</span></button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <div class="dialog-backdrop hidden" id="item-dialog">
+    <section class="sheet admin-item-sheet" role="dialog" aria-modal="true" aria-labelledby="item-dialog-title">
+      <div class="sheet-heading"><div><span class="section-kicker">MENU EDITOR</span><h2 id="item-dialog-title">Add a dish</h2></div><button class="close-button" data-close="item-dialog" type="button" aria-label="Close dish editor">×</button></div>
+      <form id="item-form" class="admin-form admin-item-form">
+        <input id="item-id" type="hidden">
+        <label class="admin-field">Dish name<input id="item-name" maxlength="80" required></label>
+        <label class="admin-field">Urdu name <span>(optional)</span><input id="item-urdu" maxlength="80" lang="ur" dir="rtl"></label>
+        <div class="admin-form-row">
+          <label class="admin-field">Category<input id="item-category" maxlength="40" placeholder="Karahi, BBQ, sides..." required></label>
+          <label class="admin-field">Price (PKR)<input id="item-price" type="number" min="1" max="10000000" step="1" required></label>
+        </div>
+        <div class="admin-form-row">
+          <label class="admin-field">Serving size<input id="item-size" maxlength="60" placeholder="Single serving" required></label>
+          <label class="admin-field">Photo badge <span>(optional)</span><input id="item-badge" maxlength="36" placeholder="House favourite"></label>
+        </div>
+        <label class="admin-field">Short menu description<textarea id="item-description" maxlength="200" rows="2" required></textarea></label>
+        <label class="admin-field">Full dish details<textarea id="item-detail" maxlength="600" rows="3"></textarea></label>
+        <label class="admin-field admin-file-field">Dish photo <span>(JPG, PNG or WebP; up to 2 MB)</span><input id="item-image-file" type="file" accept="image/jpeg,image/png,image/webp"><img class="admin-image-preview hidden" id="item-image-preview" alt="Selected dish photo preview"></label>
+        <div class="admin-check-row"><label><input id="item-enabled" type="checkbox" checked> Available on the customer menu</label><label><input id="item-popular" type="checkbox"> Mark as popular</label></div>
+        <p class="admin-error hidden" id="item-error" role="alert"></p>
+        <div class="admin-form-actions"><button class="admin-secondary-button" id="cancel-item" type="button">Cancel</button><button class="admin-primary-button" type="submit">Save dish <span aria-hidden="true">↗</span></button></div>
+      </form>
+    </section>
+  </div>
+
+  <div class="admin-toast" id="admin-toast" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17241d">
+  <meta name="description" content="Order Pakistani karahi, chicken tikka, rosh, BBQ and more from Dastarkhwan.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="app-icon.svg">
+  <link rel="stylesheet" href="style.css?v=immersive-3d-v4">
+  <title>Dastarkhwan — Pakistani Kitchen</title>
+  <script src="menu-data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Dastarkhwan home">
+      <span class="brand-logo" aria-hidden="true">د</span>
+      <span class="brand-name">Dastarkhwan<small>PAKISTANI KITCHEN</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a class="desktop-nav-link active" href="#home">Home</a>
+      <a class="desktop-nav-link" href="#menu">Our menu</a>
+      <a class="desktop-nav-link" href="#our-story">Our story</a>
+    </nav>
+    <button class="install-button hidden" id="install-button" type="button">＋ Install app</button>
+    <div class="topbar-actions">
+      <button class="orders-button cart-top-button" id="cart-open-top" type="button"><span aria-hidden="true">▱</span><span>Basket</span><b id="cart-count-top">0</b></button>
+      <button class="orders-button" id="orders-button" type="button"><span aria-hidden="true">↗</span><span class="orders-label">My orders</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-grain" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <div class="open-label"><span class="open-dot"></span> PAKISTANI FLAVOURS · MADE FRESH</div>
+        <div class="hero-title-wrap">
+          <span class="hero-sparkle" aria-hidden="true">✳</span>
+          <h1>Gather<br>around the<br><em>dastarkhwan.</em></h1>
+        </div>
+        <p>Slow-simmered karahi, fire-kissed tikka and family recipes made for passing around the table.</p>
+        <div class="hero-actions">
+          <a class="hero-cta" href="#menu">Explore the menu <span aria-hidden="true">↗</span></a>
+          <span class="hero-note"><span class="hero-note-stars" aria-hidden="true">★★★★★</span> A seat is waiting for you</span>
+        </div>
+        <div class="hero-meta"><span><b>01</b> BIG, BOLD FLAVOUR</span><span><b>02</b> MADE TO BE SHARED</span></div>
+      </div>
+      <div class="hero-visual">
+        <span class="hero-orbit hero-orbit-one" aria-hidden="true"></span>
+        <span class="hero-orbit hero-orbit-two" aria-hidden="true"></span>
+        <div class="hero-food" data-tilt>
+          <div class="hero-photo-wrap"><img src="images/menu/restaurant-interior.jpg" alt="Warm, welcoming restaurant dining room" fetchpriority="high"></div>
+          <div class="hero-image-shade"></div>
+          <div class="hero-caption"><span>WELCOME TO OUR TABLE</span><b>Good food.<br>Good company.</b></div>
+          <span class="hero-photo-index">EST. WITH LOVE <i>✳</i> SERVED WITH PRIDE</span>
+        </div>
+        <div class="hero-float-card float-card-top"><span class="float-icon">✳</span><span><b>Fresh, always</b><small>Made when you order</small></span></div>
+        <div class="hero-float-card float-card-bottom"><span class="float-icon">02</span><span><b>Made for sharing</b><small>Pull up a chair</small></span></div>
+      </div>
+    </section>
+
+    <section class="welcome-strip" aria-label="Restaurant highlights">
+      <div><span class="strip-number">01</span><span><b>Fresh from the flame</b><small>Cooked to order, every time</small></span><span class="strip-arrow" aria-hidden="true">↗</span></div>
+      <div><span class="strip-number">02</span><span><b>Rooted in tradition</b><small>Recipes with a story to tell</small></span><span class="strip-arrow" aria-hidden="true">↗</span></div>
+      <div><span class="strip-number">03</span><span><b>Always room for one more</b><small>Good food is better together</small></span><span class="strip-arrow" aria-hidden="true">↗</span></div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <div class="section-top">
+        <div><span class="section-kicker"><span class="section-kicker-dot"></span> STRAIGHT FROM OUR KITCHEN</span><h2>A little bit of <em>everything.</em></h2><p>Find your new favourite, made with care and a generous pinch of spice.</p></div>
+        <span class="menu-count" id="menu-count"></span>
+      </div>
+      <div class="menu-controls">
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="menu-search" type="search" placeholder="Search our menu..." aria-label="Search dishes"><kbd>⌕</kbd></label>
+        <span class="menu-hint"><span aria-hidden="true">✳</span> FRESHLY PREPARED DAILY</span>
+      </div>
+      <div class="categories" id="categories" role="group" aria-label="Filter menu by category"></div>
+      <div class="menu-grid" id="menu-grid"></div>
+      <div class="no-results hidden" id="no-results"><span>🍽️</span><b>Nothing on this plate</b><small>Try another search or category.</small></div>
+      <p class="menu-footnote"><span>✳</span> Prices in Pakistani rupees (PKR). Stock photos are illustrative; actual servings may look different.</p>
+    </section>
+
+    <section class="family-banner" id="our-story">
+      <div class="family-art" aria-hidden="true"><span>د</span><i>✳</i></div>
+      <div class="family-copy"><span class="section-kicker">A TABLE FULL OF STORIES</span><h2>Every meal tastes better <em>together.</em></h2><p>Inspired by the warmth of a Pakistani home: generous plates, familiar spices, and one more seat for you.</p><a href="#menu" class="family-link">Find your place at the table <span>↗</span></a></div>
+      <div class="family-stamp" aria-hidden="true">FROM OUR<br>KITCHEN<br><b>✳</b></div>
+    </section>
+  </main>
+
+  <footer class="footer"><a class="brand footer-brand" href="#"><span class="brand-logo" aria-hidden="true">د</span><span class="brand-name">Dastarkhwan<small>PAKISTANI KITCHEN</small></span></a><p>Made with love, served with a little extra naan.</p><a class="privacy-link" href="privacy.html">Privacy</a><span>© <span id="year"></span> Dastarkhwan</span></footer>
+
+  <nav class="mobile-nav" aria-label="Quick navigation">
+    <a class="nav-link active" href="#menu"><span>⌂</span>Menu</a>
+    <button class="nav-link" id="nav-orders" type="button"><span>▤</span>Orders</button>
+    <button class="nav-cart" id="cart-open" type="button"><span>🛍</span><b id="cart-count">0</b><strong>View basket</strong><span class="nav-cart-total" id="nav-cart-total">Rs 0</span></button>
+  </nav>
+
+  <div class="dialog-backdrop hidden" id="cart-backdrop">
+    <section class="sheet cart-sheet" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="sheet-handle"></div>
+      <div class="sheet-heading"><div><span class="section-kicker">GOOD CHOICE</span><h2 id="cart-title">Your basket</h2></div><button class="close-button" data-close="cart-backdrop" aria-label="Close basket">×</button></div>
+      <div class="cart-lines" id="cart-lines"></div>
+      <div class="cart-empty" id="cart-empty"><span>🛍️</span><b>Your basket is waiting.</b><small>Add something delicious from the menu.</small></div>
+      <div class="basket-total hidden" id="basket-total"><span>Subtotal</span><b id="subtotal">Rs 0</b></div>
+      <form class="checkout-form hidden" id="checkout-form">
+        <div class="checkout-heading"><span class="section-kicker">DELIVERY DETAILS</span><p>Tell us where to bring the good stuff.</p></div>
+        <label class="form-field">Your name<input id="customer-name" name="name" autocomplete="name" maxlength="80" required placeholder="e.g. Ayesha Khan"></label>
+        <label class="form-field">Phone number<input id="customer-phone" name="tel" type="tel" autocomplete="tel" maxlength="24" required placeholder="03XX XXXXXXX"></label>
+        <label class="form-field">Delivery address<textarea id="customer-address" name="address" autocomplete="street-address" maxlength="240" rows="2" required placeholder="House, street, area, city"></textarea></label>
+        <label class="form-field">Anything else? <span class="optional">(optional)</span><textarea id="customer-notes" maxlength="180" rows="2" placeholder="Spice preference, directions..."></textarea></label>
+        <label class="privacy-consent"><input id="privacy-consent" type="checkbox" required><span>I agree that the restaurant may use these details to handle my order. Read the <a href="privacy.html" target="_blank" rel="noopener noreferrer">privacy notice</a>.</span></label>
+        <p class="checkout-notice">Your order is saved in the restaurant’s inbox. You can review it and choose to send it on WhatsApp. No payment is collected here.</p>
+        <p class="checkout-error hidden" id="checkout-error" role="alert"></p>
+        <button class="place-order" type="submit">Place order <span id="place-total">Rs 0</span></button>
+      </form>
+    </section>
+  </div>
+
+  <div class="dialog-backdrop hidden" id="orders-backdrop">
+    <section class="sheet orders-sheet" role="dialog" aria-modal="true" aria-labelledby="orders-title">
+      <div class="sheet-handle"></div>
+      <div class="sheet-heading"><div><span class="section-kicker">YOUR RECENT MEALS</span><h2 id="orders-title">My orders</h2></div><button class="close-button" data-close="orders-backdrop" aria-label="Close orders">×</button></div>
+      <div class="orders-list" id="orders-list"></div>
+    </section>
+  </div>
+
+  <div class="dialog-backdrop hidden" id="dish-backdrop">
+    <section class="sheet dish-sheet" role="dialog" aria-modal="true" aria-labelledby="dish-title">
+      <div class="sheet-handle"></div>
+      <button class="close-button dish-close" data-close="dish-backdrop" aria-label="Close dish details">×</button>
+      <div id="dish-detail"></div>
+    </section>
+  </div>
+
+  <div class="dialog-backdrop hidden" id="order-success-backdrop">
+    <section class="sheet order-success-sheet" role="dialog" aria-modal="true" aria-labelledby="order-success-title">
+      <div class="sheet-heading"><div><span class="section-kicker">THANK YOU FOR YOUR ORDER</span><h2 id="order-success-title">We’ve got it.</h2></div><button class="close-button" data-close="order-success-backdrop" aria-label="Close confirmation">×</button></div>
+      <p class="order-success-copy">Your order <b id="submitted-order-id"></b> is saved in the restaurant inbox.</p>
+      <p class="order-success-whatsapp" id="order-whatsapp-notice"></p>
+      <a class="place-order whatsapp-order-link hidden" id="whatsapp-order-link" target="_blank" rel="noopener noreferrer" href="#">Send order on WhatsApp <span aria-hidden="true">↗</span></a>
+      <button class="success-continue" id="continue-shopping" type="button">Continue browsing</button>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

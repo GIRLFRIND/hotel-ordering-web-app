@@ -1,0 +1,28 @@
+{
+  "id": "./index.html",
+  "name": "Dastarkhwan — Pakistani Kitchen",
+  "short_name": "Dastarkhwan",
+  "description": "Pakistani karahi, BBQ, rosh and more, made fresh.",
+  "lang": "en-PK",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#121b16",
+  "theme_color": "#17241d",
+  "categories": ["food", "lifestyle", "shopping"],
+  "icons": [
+    {
+      "src": "./app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./app-icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
