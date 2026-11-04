@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: dastarkhwan
+    runtime: node
+    plan: starter
+    region: singapore
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/menu
+    autoDeploy: true
+    disk:
+      name: dastarkhwan-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATA_DIR
+        value: /var/data

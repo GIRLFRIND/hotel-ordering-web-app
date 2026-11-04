@@ -31,9 +31,17 @@ The customer privacy page is a starter notice, not legal advice. Before acceptin
 
 The current restaurant name, menu, descriptions, prices, and photos are demo content. The owner must replace and approve them. Stock photos are illustrative and may differ from actual dishes. Use only photos the restaurant owns or is authorized to use.
 
-## Deployment status and requirements
+## Deploy to Render
 
-This project is prepared for local use; it has **not** been published to a public hosting service or domain. Public deployment requires a hosting account, domain/HTTPS, and a persistent private disk mounted for the `data/` directory. Run only one application instance with this JSON-file storage, keep backups private, and set a strong admin password using `node setup-admin.js` on the host. Never commit `data/` or share customer records.
+The repository includes `render.yaml` for a single Node.js web service in Singapore, with a 1 GB persistent disk mounted at `/var/data`. The service uses that disk for menu changes, orders, uploaded images, and the admin password hash. Render's Starter service and persistent disk are paid resources; review Render's current pricing and confirm charges in your account before creating them. The app has not been deployed yet.
+
+1. Push the latest project files, including `render.yaml`, to GitHub.
+2. In Render, choose **New → Blueprint**, connect GitHub, and select this repository. Review the service, region, disk, and price, then create it.
+3. Wait for the service to become healthy. In its Render dashboard, open **Shell** and run `node setup-admin.js`. Enter a strong password of at least 12 characters. Do this in the deployed service, not on your local computer.
+4. Open the Render service URL and sign in at `/admin.html`. Replace the demo menu and photos, configure the restaurant WhatsApp number, and review the privacy notice before accepting real customer details.
+5. Test an order and confirm it appears in the online admin dashboard. Back up the persistent disk privately.
+
+Keep the persistent disk mounted at `/var/data` and run only one application instance with this JSON-file storage. Do not remove the disk or change `DATA_DIR` after collecting orders unless you have safely migrated the data. Never commit `data/` or share customer records. A custom domain is optional; Render provides an HTTPS URL.
 
 This JSON-file store is appropriate for a small, single-instance pilot. Before scaling or running high-volume orders, move data to a managed database and use managed object storage for uploads. Test the live hosting setup, backup restoration, business contact details, privacy notice, and order handoff before inviting customers.
 
