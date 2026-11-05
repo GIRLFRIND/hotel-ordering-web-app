@@ -65,6 +65,11 @@ test("admin, menu, WhatsApp setup and order inbox work end to end", async (t) =>
   assert.equal(privateOrders.status, 401);
   assert.equal((await fetch(`${base}/server.js`)).status, 404);
   assert.equal((await fetch(`${base}/data/state.json`)).status, 404);
+  for (const icon of ["app-icon.png", "app-icon-maskable.png"]) {
+    const response = await fetch(`${base}/${icon}`);
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get("content-type"), /^image\/png/);
+  }
 
   const wrongLogin = await fetch(`${base}/api/admin/login`, {
     method: "POST",

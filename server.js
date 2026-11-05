@@ -36,8 +36,8 @@ const contentTypes = {
 const orderStatuses = ["new", "confirmed", "preparing", "ready", "completed", "cancelled"];
 const publicFiles = new Set([
   "index.html", "admin.html", "privacy.html", "style.css", "admin.css", "app.js", "admin.js",
-  "menu-data.js", "manifest.webmanifest", "service-worker.js", "app-icon.svg",
-  "app-icon-maskable.svg", "hero-food.svg"
+  "menu-data.js", "manifest.webmanifest", "service-worker.js", "app-icon.png",
+  "app-icon-maskable.png", "hero-food.svg"
 ]);
 
 function sendJson(response, status, value, headers = {}) {

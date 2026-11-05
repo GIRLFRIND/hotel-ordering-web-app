@@ -13,15 +13,15 @@
   "categories": ["food", "lifestyle", "shopping"],
   "icons": [
     {
-      "src": "./app-icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "./app-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./app-icon-maskable.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "./app-icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "maskable"
     }
   ]

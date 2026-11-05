@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_NAME = "dastarkhwan-static-v11";
+const CACHE_NAME = "dastarkhwan-static-v12";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -12,8 +12,8 @@ const APP_FILES = [
   "./admin.html",
   "./privacy.html",
   "./manifest.webmanifest",
-  "./app-icon.svg",
-  "./app-icon-maskable.svg",
+  "./app-icon.png",
+  "./app-icon-maskable.png",
   "./images/pakistani-feast.jpg",
   "./images/menu/chicken-karahi.jpg",
   "./images/menu/chicken-tikka.jpg",
